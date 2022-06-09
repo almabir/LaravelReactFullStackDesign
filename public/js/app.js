@@ -5513,10 +5513,10 @@ var ViewModal = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(ViewModal);
 
-  function ViewModal() {
+  function ViewModal(props) {
     _classCallCheck(this, ViewModal);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(ViewModal, [{
@@ -5525,7 +5525,7 @@ var ViewModal = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
           className: "modal fade",
-          id: "modalView",
+          id: "modalView" + this.props.modalId,
           tabIndex: "-1",
           "aria-labelledby": "exampleModalLabel",
           "aria-hidden": "true",
@@ -5545,9 +5545,13 @@ var ViewModal = /*#__PURE__*/function (_Component) {
                   "data-bs-dismiss": "modal",
                   "aria-label": "Close"
                 })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
                 className: "modal-body",
-                children: "..."
+                children: ["Employee Name: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("strong", {
+                  children: this.props.employeeData.currentEmployeeName
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), "Employee Salary: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("strong", {
+                  children: this.props.employeeData.currentEmployeeSalary
+                })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
                 className: "modal-footer",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
@@ -5719,19 +5723,21 @@ var TableActionButton = /*#__PURE__*/function (_Component) {
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('get/individual/employee/details', {
         employeeId: id
       }).then(function (response) {
-        console.log(response.data);
+        _this.setState({
+          currentEmployeeName: response.data.name,
+          currentEmployeeSalary: response.data.salary
+        });
       });
     });
 
+    _this.state = {
+      currentEmployeeName: null,
+      currentEmployeeSalary: null
+    };
     return _this;
   }
 
   _createClass(TableActionButton, [{
-    key: "Alertt",
-    value: function Alertt() {
-      console.log("Hi");
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -5743,12 +5749,13 @@ var TableActionButton = /*#__PURE__*/function (_Component) {
           onClick: function onClick() {
             _this2.getEmployeeDetails(_this2.props.eachRowId);
           },
-          "data-bs-target": "#modalView",
+          "data-bs-target": "#modalView" + this.props.eachRowId,
           type: "button",
           className: "btn btn-primary",
           children: "View"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Modal_ViewModal__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          modalId: this.props.eachRowId
+          modalId: this.props.eachRowId,
+          employeeData: this.state
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
           "data-bs-toggle": "modal",
           "data-bs-target": "#modalUpdate",
