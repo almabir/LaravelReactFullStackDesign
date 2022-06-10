@@ -47,4 +47,14 @@ class EmployeeController extends Controller
             Log::error($e);
         }
     }
+
+    public function deleteEmployee($id){
+        try{
+            $employee = Employee::where('id', $id)->first();
+            $employee->delete();
+        }
+        catch(Exception $e){
+            Log::error($e);
+        }
+    }
 }

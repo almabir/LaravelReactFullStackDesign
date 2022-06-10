@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class UpdateModal extends Component {
     constructor(props) {
@@ -49,8 +51,11 @@ export default class UpdateModal extends Component {
             employeeId: this.props.modalId,
             employeeName: this.state.employeeName,
             employeeSalary: this.state.employeeSalary,
-        }).then( (response) =>{
-            location.reload();
+        }).then( () =>{
+            toast.success("Employee Updated Successfully!");
+            setTimeout(()=>{
+                location.reload();
+            },  2000);
         });
 
     }

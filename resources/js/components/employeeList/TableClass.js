@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import Table from './Table';
 import TableRow from './TableRow'
+import { ToastContainer, toast } from 'react-toastify';
 
 export default class TableClass extends Component {
     constructor(props) {
@@ -30,6 +31,7 @@ export default class TableClass extends Component {
     render() {
         return (
             <div>
+                <ToastContainer/>
                 <div className='card'>
                     <div className='card-header'>
                         Employee List RCC
