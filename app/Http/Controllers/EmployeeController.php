@@ -11,7 +11,7 @@ class EmployeeController extends Controller
 {
     public function getEmployeeList(){
         try{
-            $employees = Employee::all();
+            $employees = Employee::orderBy('id', 'desc')->get();
             return response()->json($employees);
         }
         catch(Exception $e){
@@ -52,6 +52,20 @@ class EmployeeController extends Controller
         try{
             $employee = Employee::where('id', $id)->first();
             $employee->delete();
+        }
+        catch(Exception $e){
+            Log::error($e);
+        }
+    }
+
+    public function createEmployee(Request $request){
+        try{
+            $employeeName = $request->get('employeeName');
+            $employeeSalary = $request->get('employeeSalary');
+            Employee::create([
+                'name' => $employeeName,
+                'salary' => $employeeSalary,
+            ]);
         }
         catch(Exception $e){
             Log::error($e);

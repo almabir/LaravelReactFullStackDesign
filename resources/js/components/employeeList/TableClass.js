@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Table from './Table';
 import TableRow from './TableRow'
 import { ToastContainer, toast } from 'react-toastify';
+import CreateModal from './Modal/CreateModal';
 
 export default class TableClass extends Component {
     constructor(props) {
@@ -31,10 +32,16 @@ export default class TableClass extends Component {
     render() {
         return (
             <div>
-                <ToastContainer/>
+                <ToastContainer />
                 <div className='card'>
                     <div className='card-header'>
-                        Employee List RCC
+                        Employee List RCC 
+                        <button className='btn btn-success float-end'
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalCreate">
+                            Add Employee
+                        </button>
+                        <CreateModal/>
                     </div>
                     <div className='card-body'>
                         <table border="1" className='table table-striped table-hover'>
@@ -48,7 +55,7 @@ export default class TableClass extends Component {
                             </thead>
                             <tbody>
                                 {
-                                    this.state.employees.map(function(data, index){
+                                    this.state.employees.map(function (data, index) {
                                         return <TableRow key={index} data={data} />
                                     })
                                 }
