@@ -4,8 +4,6 @@ import DeleteModal from './Modal/DeleteModal';
 import UpdateModal from './Modal/UpdateModal';
 import ViewModal from './Modal/ViewModal'
 
-
-
 export default class TableActionButton extends Component {
     constructor(props) {
         super(props);

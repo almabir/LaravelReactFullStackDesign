@@ -19,8 +19,6 @@ function App() {
                         </div>
                     </div>
                     <div className='col-md-8'>
-                        <Table/>
-                        <br/>
                         <TableClass/>
                     </div>
                 </div>
