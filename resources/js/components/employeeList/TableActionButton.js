@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
+import UpdateModal from './Modal/UpdateModal';
 import ViewModal from './Modal/ViewModal'
 
 
@@ -14,28 +15,37 @@ export default class TableActionButton extends Component {
         }
     }
     getEmployeeDetails = (id) => {
-        axios.post('get/individual/employee/details',{
+        axios.post('get/individual/employee/details', {
             employeeId: id,
-        }).then((response)=>{
+        }).then((response) => {
             this.setState({
                 currentEmployeeName: response.data.name,
                 currentEmployeeSalary: response.data.salary,
             });
+            //console.log(response)
         });
+        
     }
 
     render() {
         return (
             <div className='btn btn-group'>
                 <button data-bs-toggle="modal"
-                    onClick={ () => {this.getEmployeeDetails(this.props.eachRowId)}}
-                    data-bs-target={"#modalView"+this.props.eachRowId}
+                    onClick={() => { this.getEmployeeDetails(this.props.eachRowId) }}
+                    data-bs-target={"#modalView" + this.props.eachRowId}
                     type="button"
                     className='btn btn-primary'>
-                    View 
+                    View
                 </button>
-                <ViewModal modalId={this.props.eachRowId} employeeData={ this.state }/>
-                <button  data-bs-toggle="modal" data-bs-target="#modalUpdate" type="button" className='btn btn-info'>Update</button>
+                <ViewModal modalId={this.props.eachRowId} employeeData={this.state} />
+                <button data-bs-toggle="modal"
+                   data-bs-target={"#modalUpdate" + this.props.eachRowId}
+                   onClick={() => { this.getEmployeeDetails(this.props.eachRowId) }}
+                    type="button"
+                    className='btn btn-info'>
+                    Update
+                </button>
+                <UpdateModal modalId={this.props.eachRowId} employeeData={this.state} />
                 <button data-bs-toggle="modal" data-bs-target="#modalDelete" type="button" className='btn btn-danger'>Delete</button>
             </div>
         )

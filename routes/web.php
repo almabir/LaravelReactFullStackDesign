@@ -23,4 +23,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('get/employee/list', [App\Http\Controllers\EmployeeController::class, 'getEmployeeList']);
 Route::post('get/individual/employee/details', [App\Http\Controllers\EmployeeController::class, 'getEmployeeDetails']);
+Route::post('update/employee/data', [App\Http\Controllers\EmployeeController::class, 'updateEmployee']);
+
 
